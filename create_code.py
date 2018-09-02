@@ -31,68 +31,17 @@ class BaseModel(peewee.Model):
     class Meta:
         database = database
 
-class PieceModel(BaseModel):
-    name = peewee.CharField(max_length = 10 , unique = True)
-    date_added = peewee.DateTimeField(default = datetime.datetime.now)
-
-class Line(BaseModel):
-    name = peewee.CharField(max_length = 10 , unique = True)
-    alias = peewee.CharField(max_length = 3 , unique = True)
-    date_added = peewee.DateTimeField(default = datetime.datetime.now)
-
-class Shift(BaseModel):
-    alias = peewee.CharField(max_length = 3 ,)
-    date_added = peewee.DateTimeField(default = datetime.datetime.now)
-
-
-
-class Piece(BaseModel):
-    lot_number = peewee.CharField()
-    date_added = peewee.DateTimeField(default = datetime.datetime.now)
-    casting_date = peewee.DateTimeField(unique = True)
-    model = peewee.ForeignKeyField(PieceModel , backref = 'pieces')
-    line  = peewee.ForeignKeyField(Line , backref = 'pieces')
-    shift = peewee.ForeignKeyField(Shift , backref = 'pieces')
-
-
-class Process(BaseModel):
-    name = peewee.CharField()
-    piece = peewee.ForeignKeyField(Piece , backref = 'procesess')
-
-class Parameter(BaseModel):
-    Process = peewee.ForeignKeyField(Process , backref = 'parameters')
-    parameter_1  = peewee.FloatField()
-    parameter_2  = peewee.FloatField()
-    parameter_3  = peewee.FloatField()
-    parameter_4  = peewee.FloatField()
-    parameter_5  = peewee.FloatField()
-    parameter_6  = peewee.FloatField()
-    parameter_7  = peewee.FloatField()
-    parameter_8  = peewee.FloatField()
-    parameter_9  = peewee.FloatField()
-    parameter_10 = peewee.FloatField()
-
-
-
-
+class dec_engraving(BaseModel):
+    str_code = peewee.CharField(max_length = 20 ,  primary_key = True ,null = False , unique = True)
+    code_from_probe = peewee.CharField(max_length = 20  ,null = True)
+    code_engraved = peewee.BooleanField(index=True , null = True , default = 0 , unique = False )
+    status = peewee.BooleanField(index=True , null = False , unique = False )
+    date_added = peewee.DateTimeField(default = datetime.datetime.now , unique = True)
 
 
 
 if __name__ == '__main__':
 
-    database.create_tables([PieceModel , Line , Shift , Piece , Process , Parameter])
+    database.create_tables([dec_engraving])
     
-    models = ['4G401' , '4G101' , '4G110' , '4G210' , '4G450' , '4G150' , '4G160' , '4G260']
-
-
-    for model in models:
-        PieceModel.create(name = model)
-
-        
-    Line.create(name = 'Line 1' , alias = 'I')
-    Line.create(name = 'Line 2' , alias = 'J')
-    Line.create(name = 'Line 3' , alias = 'K')
-
-    Shift.create(alias = 'D')
-    Shift.create(alias = 'N')
-    Shift.create(alias = 'M')
+    
