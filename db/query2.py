@@ -15,7 +15,7 @@ class AccessDB(object):
 
         # connect to db
         self.con = pyodbc.connect('DRIVER={};DBQ={}'.format(DRV,MDB))
-        self.cur = con.cursor()
+        self.cur = self.con.cursor()
         
         #print(self.MDB)
         
