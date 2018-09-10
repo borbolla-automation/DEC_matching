@@ -36,11 +36,10 @@ class AccessDB(object):
         return self.str_dc_mtx    
 
     def insert(self):
-        i = 0
-        for code in self.str_mtx:
+        for code in self.str_dc_mtx:
             try:
-                piece , created = dec_engraving.get_or_create(str_code = code , code_from_die_casting = self.dc_mtx[i] , status = 0)
-                i += 1
+                piece , created = dec_engraving.get_or_create(str_code = code[0] , code_from_die_casting = code[1] , status = 0)
+                
             except peewee.IntegrityError as error:
                 raise error
 
