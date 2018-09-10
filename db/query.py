@@ -20,7 +20,7 @@ class AccessDB(object):
         SQL = 'SELECT CodeData , Dtime FROM LeakTesterData WHERE Date()= DateValue(Dtime) OR Date()-1 = DateValue(Dtime);'
         self.rows = self.cur.execute(SQL).fetchall()
         print(len(self.rows))
-        return self.rows
+        return self.rows[-1]
 
     def create_str(self):
         self.str_dc_mtx = []
