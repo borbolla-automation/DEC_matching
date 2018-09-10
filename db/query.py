@@ -22,7 +22,8 @@ class AccessDB(object):
         return self.rows
 
     def create_str(self):
-        str_mtx = []
+        self.str_mtx = []
+        self.dc_mtx  = []
         for piece in self.rows:
             print(piece[0])
             if 'MASTER' not in piece[0]:
@@ -30,9 +31,23 @@ class AccessDB(object):
                 factory = "K"
                 datetime = piece[0][11:-3]
                 serial   = piece[0][-3:] 
-                str_mtx.append("%s%s%s%s"%(model , factory , datetime , serial))
+                self.str_mtx.append("%s%s%s%s"%(model , factory , datetime , serial))
+                self.dc_mtx.append(piece[0])
 
-        return str_mtx    
+        return self.str_mtx , self.dc_mtx    
+
+    def insert(self):
+        i = 0
+        for code in self.str_mtx:
+            try:
+                piece , created = dec_engraving.get_or_create(str_code = code , code_from_die_casting = self.dc_mtx[i] , status = 0)
+                i += 1
+            except peewee.IntegrityError as error:
+                i += 1
+                raise error
+
+            
+
 
 
     def open_connctions(self):
