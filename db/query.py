@@ -66,6 +66,12 @@ class AccessDB(object):
         self.cur.close()
         self.con.close()
         
+
+if __name__ == '__main__':
+    leak2 = AccessDB('D')
+    last = leak2.query()
+    crt_str = leak2.create_str()
+    created = leak2.insert()
 """
     def insert(self):
         for piece in self.rows:
