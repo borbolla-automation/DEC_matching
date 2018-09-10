@@ -16,7 +16,7 @@ class AccessDB(object):
         self.cur = self.con.cursor()
 
     def query(self):
-        SQL = 'SELECT * FROM LeakTesterData WHERE DTime = date();'
+        SQL = 'SELECT CodeData , Dtime FROM LeakTesterData ;'
         rows = self.cur.execute(SQL).fetchall()
         print(len(rows))
         return rows
