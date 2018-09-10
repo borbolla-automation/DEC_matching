@@ -33,7 +33,7 @@ class AccessDB(object):
                 self.str_dc_mtx.append(["%s%s%s%s"%(model , factory , datetime , serial),piece[0]])
                 
 
-        return self.str_mtx , self.dc_mtx    
+        return self.str_dc_mtx    
 
     def insert(self):
         i = 0
