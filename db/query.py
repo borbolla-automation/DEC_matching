@@ -43,11 +43,11 @@ class AccessDB(object):
         self.cur.close()
         self.con.close()
         
-
+"""
     def insert(self):
         for piece in self.rows:
             piece , created = dec_engraving.get_or_create(piece[])
-
+"""
 
 
 
