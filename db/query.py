@@ -43,7 +43,6 @@ class AccessDB(object):
                 piece , created = dec_engraving.get_or_create(str_code = code , code_from_die_casting = self.dc_mtx[i] , status = 0)
                 i += 1
             except peewee.IntegrityError as error:
-                i += 1
                 raise error
 
             
