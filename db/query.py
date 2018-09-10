@@ -16,9 +16,9 @@ class AccessDB(object):
         self.cur = self.con.cursor()
 
     def query(self):
-        SQL = 'SELECT CodeData , Dtime FROM LeakTesterData WHERE Dtime = DATE()-1;'
+        SQL = 'SELECT CodeData , Dtime FROM LeakTesterData WHERE Dtime == date()-1;'
         rows = self.cur.execute(SQL).fetchall()
-
+        print(len(rows))
         return rows
 
     def open_connctions(self):
