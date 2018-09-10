@@ -25,21 +25,20 @@ class AccessDB(object):
     def create_str(self):
         self.str_dc_mtx = []
         dt = datetime.datetime.now()
-        for piece in self.rows[-1]:
-            print(piece[0])
-            if 'MASTER' not in piece[0]:
-                model = piece[0][6:11]
-                yy = str(dt.year)[2:]
-                mm = str(dt.month).zfill(2)
-                dd = str(dt.day).zfill(2)   
-                date = "%s%s%s"%(yy,mm,dd)
-                hh = dt.hour
-                if hh > 5 and hh <19:
-                    shift = 'D'
-                else:
-                    shift = 'N'
-                serial   = piece[0][-3:].zfill(4) 
-                self.str_dc_mtx.append(["%s%s%s%s"%(model , date , shift , serial),piece[0]])
+        
+        if 'MASTER' not in self.rows[-1][0]:
+            model = self.rows[-1][0][6:11]
+            yy = str(dt.year)[2:]
+            mm = str(dt.month).zfill(2)
+            dd = str(dt.day).zfill(2)   
+            date = "%s%s%s"%(yy,mm,dd)
+            hh = dt.hour
+            if hh > 5 and hh <19:
+                shift = 'D'
+            else:
+                shift = 'N'
+            serial   = self.rows[-1][0][-3:].zfill(4) 
+            self.str_dc_mtx.append(["%s%s%s%s"%(model , date , shift , serial),self.rows[-1][0]])
                 
 
         return self.str_dc_mtx    
