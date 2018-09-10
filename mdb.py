@@ -9,7 +9,8 @@ con = pyodbc.connect('DRIVER={};DBQ={}'.format(DRV,MDB))
 cur = con.cursor()
 
 # run a query and get the results
-SQL = 'SELECT * FROM mytable;' # your query goes here
+SQL = 'SELECT * FROM LeakTesterData;' # your query goes here
 rows = cur.execute(SQL).fetchall()
+print(rows)
 cur.close()
 con.close()
