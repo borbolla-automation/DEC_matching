@@ -33,7 +33,7 @@ class AccessDB(object):
                 mm = str(dt.month).zfill(2)
                 dd = str(dt.day).zfill(2)
                 date = "%s%s%s"%(yy,mm,dd)
-                hh = str(dt.hour)
+                hh = dt.hour
                 if hh > 5 and hh <19:
                     shift = 'D'
                 else:
