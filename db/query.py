@@ -13,11 +13,11 @@ class AccessDB(object):
         print(self.MDB)
         self.DRV = '{Microsoft Access Driver (*.mdb)}'
         self.con = pyodbc.connect('DRIVER={};DBQ={}'.format(self.DRV,self.MDB))
-        self.cur = con.cursor()
+        self.cur = self.con.cursor()
 
     def query(self):
         SQL = 'SELECT CodeData , Dtime FROM LeakTesterData WHERE DTime >= DATE()-1 AND DTime <= DATE();'
-        rows = cur.execute(SQL).fetchall()
+        rows = self.cur.execute(SQL).fetchall()
 
         return rows
 
