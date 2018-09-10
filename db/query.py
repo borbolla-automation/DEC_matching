@@ -25,11 +25,12 @@ class AccessDB(object):
         str_mtx = []
         for piece in self.rows:
             print(piece[0])
-            model = piece[0][6:11]
-            factory = "K"
-            datetime = piece[0][11:-3]
-            serial   = piece[0][-3:] 
-            str_mtx.append("%s%s%s%s"%(model , factory , datetime , serial))
+            if 'MASTER' not in piece[0]:
+                model = piece[0][6:11]
+                factory = "K"
+                datetime = piece[0][11:-3]
+                serial   = piece[0][-3:] 
+                str_mtx.append("%s%s%s%s"%(model , factory , datetime , serial))
 
         return str_mtx    
 
