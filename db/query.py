@@ -22,8 +22,7 @@ class AccessDB(object):
         return self.rows
 
     def create_str(self):
-        self.str_mtx = []
-        self.dc_mtx  = []
+        self.str_dc_mtx = []
         for piece in self.rows:
             print(piece[0])
             if 'MASTER' not in piece[0]:
