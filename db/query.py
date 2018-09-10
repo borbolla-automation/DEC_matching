@@ -31,8 +31,8 @@ class AccessDB(object):
                 factory = "K"
                 datetime = piece[0][11:-3]
                 serial   = piece[0][-3:] 
-                self.str_mtx.append("%s%s%s%s"%(model , factory , datetime , serial))
-                self.dc_mtx.append(piece[0])
+                self.str_dc_mtx.append(["%s%s%s%s"%(model , factory , datetime , serial),piece[0]])
+                
 
         return self.str_mtx , self.dc_mtx    
 
