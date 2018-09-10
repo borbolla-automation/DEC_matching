@@ -7,14 +7,18 @@ import csv, pyodbc
 class AccessDB(object):
     """docstring for AccessDB
 """
-    def __init__(self, drive):
+    def __init__(self):
         
-        self.drive = drive
-        self.MDB = '%s:\DataManager\DataDB.mdb'%self.drive 
-        print(self.MDB)
-        self.DRV = '{Microsoft Access Driver (*.mdb)}'
-        self.con = pyodbc.connect('DRIVER={};DBQ={}'.format(self.DRV,self.MDB))
-        self.cur = self.con.cursor()
+        
+        MDB = 'C:\LeakDataManager\DataDB.mdb'; DRV = '{Microsoft Access Driver (*.mdb)}';
+
+
+        # connect to db
+        self.con = pyodbc.connect('DRIVER={};DBQ={}'.format(DRV,MDB))
+        self.cur = con.cursor()
+        
+        #print(self.MDB)
+        
 
     def query(self):
         SQL = 'SELECT CodeData , Dtime FROM LeakTesterData WHERE Date()= DateValue(Dtime) OR Date()-1 = DateValue(Dtime);'
@@ -68,7 +72,7 @@ class AccessDB(object):
         
 
 if __name__ == '__main__':
-    leak2 = AccessDB('C')
+    leak2 = AccessDB()
     last = leak2.query()
     crt_str = leak2.create_str()
     created = leak2.insert()
