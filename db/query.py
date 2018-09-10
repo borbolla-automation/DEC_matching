@@ -44,13 +44,13 @@ class AccessDB(object):
         return self.str_dc_mtx    
 
     def insert(self):
-        for code in self.str_dc_mtx:
-            print(code)
-            piece , created = dec_engraving.get_or_create(str_code = code[0] , code_from_die_casting = code[1] , status = 0)
-            if created : 
-                print("Created") 
-            else: 
-                print("not created!")    
+        
+        print(code)
+        piece , created = dec_engraving.get_or_create(str_code = self.str_dc_mtx[0] , code_from_die_casting = str_dc_mtx[1] , status = 0)
+        if created : 
+            print("Created") 
+        else: 
+            print("not created!")    
             
             
 
