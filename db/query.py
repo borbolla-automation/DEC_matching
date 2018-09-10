@@ -25,7 +25,7 @@ class AccessDB(object):
     def create_str(self):
         self.str_dc_mtx = []
         dt = datetime.datetime.now()
-        for piece in self.rows:
+        for piece in self.rows[-1]:
             print(piece[0])
             if 'MASTER' not in piece[0]:
                 model = piece[0][6:11]
