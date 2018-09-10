@@ -17,9 +17,21 @@ class AccessDB(object):
 
     def query(self):
         SQL = 'SELECT CodeData , Dtime FROM LeakTesterData WHERE Date()= DateValue(Dtime) OR Date()-1 = DateValue(Dtime);'
-        rows = self.cur.execute(SQL).fetchall()
+        self.rows = self.cur.execute(SQL).fetchall()
         print(len(rows))
-        return rows
+        return self.rows
+
+    def create_str(self):
+        str_mtx = []
+        for piece in self.rows:
+            model = piece[0][6:11]
+            factory = "K"
+            datetime = piece[0][11:-3]
+            serial   = piece[-3:] 
+            str_mtx.append("%s%s%s%s"%(model , factory , datetime , serial))
+
+        return str_mtx    
+
 
     def open_connctions(self):
         self.MDB = '%s:\DataManager\DataDB.mdb'%self.drive 
@@ -32,7 +44,9 @@ class AccessDB(object):
         self.con.close()
         
 
-
+    def insert(self):
+        for piece in self.rows:
+            piece , created = dec_engraving.get_or_create(piece[])
 
 
 
