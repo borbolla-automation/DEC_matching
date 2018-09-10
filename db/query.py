@@ -38,7 +38,7 @@ class AccessDB(object):
             else:
                 shift = 'N'
             serial   = self.rows[-1][0][-3:].zfill(4) 
-            self.str_dc_mtx.append(["%s%s%s%s"%(model , date , shift , serial),self.rows[-1][0]])
+            self.str_dc_mtx = ["%s%s%s%s"%(model , date , shift , serial),self.rows[-1][0]]
                 
 
         return self.str_dc_mtx    
