@@ -24,6 +24,7 @@ class AccessDB(object):
     def create_str(self):
         str_mtx = []
         for piece in self.rows:
+            print(piece[0])
             model = piece[0][6:11]
             factory = "K"
             datetime = piece[0][11:-3]
