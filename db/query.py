@@ -48,7 +48,10 @@ class AccessDB(object):
         for code in self.str_dc_mtx:
             print(code)
             piece , created = dec_engraving.get_or_create(str_code = code[0] , code_from_die_casting = code[1] , status = 0)
-            if created : print("Created") else: print("not created!")    
+            if created : 
+                print("Created") 
+            else: 
+                print("not created!")    
             
             
 
