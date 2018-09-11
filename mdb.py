@@ -9,8 +9,8 @@ con = pyodbc.connect('DRIVER={};DBQ={}'.format(DRV,MDB))
 cur = con.cursor()
 
 # run a query and get the results
-SQL = 'SELECT * FROM LeakTesterData ORDER BY Dtime DESC;' # your query goes here
+SQL = 'SELECT Num ,Dtime FROM LeakTesterData ORDER BY Num DESC;' # your query goes here
 rows = cur.execute(SQL).fetchall()
-print(rows[-1])
+print(rows[-50:])
 cur.close()
 con.close()

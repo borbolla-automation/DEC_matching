@@ -17,7 +17,7 @@ class AccessDB(object):
         self.cur = self.con.cursor()
 
     def query(self):
-        SQL = 'SELECT CodeData , Dtime FROM LeakTesterData WHERE Date()= DateValue(Dtime) OR Date()-1 = DateValue(Dtime) ORDER BY DTime DESC;'
+        SQL = 'SELECT Num , CodeData , Dtime FROM LeakTesterData WHERE Date()= DateValue(Dtime) OR Date()-1 = DateValue(Dtime) ORDER BY Num DESC;'
         self.rows = self.cur.execute(SQL).fetchall()
         print(len(self.rows))
         return self.rows[-1]
