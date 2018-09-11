@@ -26,8 +26,8 @@ class AccessDB(object):
         self.str_dc_mtx = []
         dt = datetime.datetime.now()
         
-        if 'MASTER' not in self.rows[-1][0]:
-            model = self.rows[-1][0][6:11]
+        if 'MASTER' not in self.rows[0][0]:
+            model = self.rows[0][0][6:11]
             yy = str(dt.year)[2:]
             mm = str(dt.month).zfill(2)
             dd = str(dt.day).zfill(2)   
@@ -37,8 +37,9 @@ class AccessDB(object):
                 shift = 'D'
             else:
                 shift = 'N'
-            serial   = self.rows[-1][0][-3:].zfill(4) 
-            self.str_dc_mtx = ["%s%s%s%s"%(model , date , shift , serial),self.rows[-1][0]]
+            serial   = self.rows[0][0][-3:].zfill(4) 
+            print(self.rows[0][0])
+            self.str_dc_mtx = ["%s%s%s%s"%(model , date , shift , serial),self.rows[0][0]]
                 
 
         return self.str_dc_mtx    
@@ -46,7 +47,7 @@ class AccessDB(object):
     def insert(self):
         
         print(self.str_dc_mtx)
-        piece , created = dec_engraving.get_or_create(str_code = self.str_dc_mtx[0] , code_from_die_casting = self.str_dc_mtx[1] , status = 0)
+        piece , created = dec_engraving.get_or_create(str_code = self.str_dc_mtx[0] , code_from_die_casting = self.str_dc_mtx[1] , status = 0 , machine_code = 2)
         if created : 
             print("Created") 
         else: 

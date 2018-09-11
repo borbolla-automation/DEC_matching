@@ -51,7 +51,7 @@ class AccessDB(object):
     def insert(self):
         
         print(self.str_dc_mtx)
-        piece , created = dec_engraving.get_or_create(str_code = self.str_dc_mtx[0] , code_from_die_casting = self.str_dc_mtx[1] , status = 0)
+        piece , created = dec_engraving.get_or_create(str_code = self.str_dc_mtx[0] , code_from_die_casting = self.str_dc_mtx[1] , status = 0 , machine_code = 1)
         print('piece ')
         if created : 
             print("Created") 
