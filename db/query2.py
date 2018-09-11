@@ -24,14 +24,14 @@ class AccessDB(object):
         SQL = 'SELECT  CodeData , Dtime , Num FROM LeakTesterData WHERE Date()= DateValue(Dtime) OR Date()-1 = DateValue(Dtime) ORDER BY Num DESC;'
         self.rows = self.cur.execute(SQL).fetchall()
         print(self.rows)
-        return self.rows[-1]
+        return self.rows[0]
 
     def create_str(self):
         self.str_dc_mtx = []
         dt = datetime.datetime.now()
         
-        if 'MASTER' not in self.rows[-1][0]:
-            model = self.rows[-1][0][6:11]
+        if 'MASTER' not in self.rows[0][0]:
+            model = self.rows[0][0][6:11]
             yy = str(dt.year)[2:]
             mm = str(dt.month).zfill(2)
             dd = str(dt.day).zfill(2)   
@@ -42,7 +42,7 @@ class AccessDB(object):
             else:
                 shift = 'N'
             serial   = self.rows[-1][0][-3:].zfill(4) 
-            self.str_dc_mtx = ["%s%s%s%s"%(model , date , shift , serial),self.rows[-1][0]]
+            self.str_dc_mtx = ["%s%s%s%s"%(model , date , shift , serial),self.rows[0][0]]
                 
 
         return self.str_dc_mtx    
