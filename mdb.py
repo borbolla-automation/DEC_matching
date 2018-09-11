@@ -11,6 +11,6 @@ cur = con.cursor()
 # run a query and get the results
 SQL = 'SELECT * FROM LeakTesterData;' # your query goes here
 rows = cur.execute(SQL).fetchall()
-print(rows)
+print(rows[-1])
 cur.close()
 con.close()
