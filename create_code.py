@@ -32,7 +32,7 @@ class BaseModel(peewee.Model):
         database = database
 
 class dec_engraving(BaseModel):
-    str_code = peewee.CharField(max_length = 20 ,  primary_key = True ,null = False , unique = True)
+    str_code = peewee.CharField(max_length = 20 ,  primary_key = True ,null = False , unique = True , default = 'ERROR')
     code_from_die_casting = peewee.CharField(max_length = 26  ,null = False)
     code_from_probe = peewee.CharField(max_length = 20  ,null = True)
     code_engraved = peewee.BooleanField(index=True , null = True , default = 0 , unique = False )
