@@ -21,7 +21,7 @@ class AccessDB(object):
         
 
     def query(self):
-        SQL = 'SELECT CodeData , Dtime FROM LeakTesterData WHERE Date()= DateValue(Dtime) OR Date()-1 = DateValue(Dtime);'
+        SQL = 'SELECT CodeData , Dtime FROM LeakTesterData;# WHERE Date()= DateValue(Dtime) OR Date()-1 = DateValue(Dtime);'
         self.rows = self.cur.execute(SQL).fetchall()
         print(len(self.rows))
         return self.rows[-1]
@@ -51,6 +51,7 @@ class AccessDB(object):
         
         print(self.str_dc_mtx)
         piece , created = dec_engraving.get_or_create(str_code = self.str_dc_mtx[0] , code_from_die_casting = self.str_dc_mtx[1] , status = 0)
+        print('piece ')
         if created : 
             print("Created") 
         else: 
