@@ -38,6 +38,7 @@ class dec_engraving(BaseModel):
     code_engraved = peewee.BooleanField(index=True , null = True , default = 0 , unique = False )
     status = peewee.BooleanField(index=True , null = False , unique = False )
     date_added = peewee.DateTimeField(default = datetime.datetime.now , unique = True)
+    machine_code = peewee.IntegerField(null = False , unique = False , max_length = 10)
 
 
 
