@@ -1,7 +1,7 @@
 import peewee
 from models import *
 import datetime
-import os
+from uuid import getnode as get_mac
 import csv, pyodbc
 
 class AccessDB(object):
@@ -9,20 +9,26 @@ class AccessDB(object):
 """
     def __init__(self, drive):
         
-        self.drive = drive
-        self.MDB = '%s\DataDB.mdb'%os.getcwd()
-
+        self.computer_id = {'LEAK TEST #1': 268891672818713 , 'LEAK TEST #2' : 84440845556379}
+        self.mac = get_mac()
+        if self.mac == self.computer_id['LEAK TEST #1']:
+            self.drive = 'C'
+        if self.mac == self.computer_id['LEAK TEST #2']:
+            self.drive = 'D'    
+        
+        self.MDB = '%s:\DataManager\DataDB.mdb'%self.drive 
         print(self.MDB)
         self.DRV = '{Microsoft Access Driver (*.mdb)}'
         self.con = pyodbc.connect('DRIVER={};DBQ={}'.format(self.DRV,self.MDB))
         self.cur = self.con.cursor()
+        
 
     def query(self):
         SQL = 'SELECT  CodeData , Dtime ,Num FROM LeakTesterData WHERE Date()= DateValue(Dtime) OR Date()-1 = DateValue(Dtime) ORDER BY Num DESC;'
         self.rows = self.cur.execute(SQL).fetchall()
         print(len(self.rows))
-        return self.rows[0]
-
+        return self.rows[-1]
+'''
     def create_str(self):
         self.str_dc_mtx = []
         dt = datetime.datetime.now()
@@ -44,13 +50,16 @@ class AccessDB(object):
                 
 
         return self.str_dc_mtx    
-
+'''
     def insert(self):
         
         print(self.str_dc_mtx)
-
-        machine
-        casting_piece , created = dec_engraving.get_or_create(casting_code = self.rows[0])
+        if self.mac == self.computer_id['LEAK TEST #1']:
+            machine , created = machine.get_or_create(name = 'LEAK TEST #1' )
+        if self.mac == self.computer_id['LEAK TEST #2']:
+            machine , created = machine.get_or_create(name = 'LEAK TEST #2' )    
+        
+        casting_piece , created = dec_engraving.get_or_create(casting_code = self.rows[0][0])
         if created : 
             print("Created") 
         else: 

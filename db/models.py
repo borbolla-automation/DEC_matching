@@ -50,7 +50,7 @@ class ManufacturingCode(BaseModel):
     date_added = peewee.DateTimeField(default = datetime.datetime.now , unique = True)
 
 class Machine(BaseModel):
-    name = peewee.CharField(max_length = 20  ,null = False)
+    name = peewee.CharField(max_length = 20  ,null = False , unique = True)
     casting_info = peewee.ForeignKeyField(CastingCode , backref = 'machines' , null = True)
     #manufacturing_info = peewee.ForeignKeyField(ManufacturingCode , backref = 'machines' , null = True)
     date_added = peewee.DateTimeField(default = datetime.datetime.now , unique = True)
