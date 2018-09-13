@@ -10,7 +10,7 @@ class AccessDB(object):
     def __init__(self, drive):
         
         self.drive = drive
-        self.MDB = '%s:\DataDB.mdb'%os.getcwd()
+        self.MDB = '%s\DataDB.mdb'%os.getcwd()
 
         print(self.MDB)
         self.DRV = '{Microsoft Access Driver (*.mdb)}'
