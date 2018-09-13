@@ -33,7 +33,7 @@ class AccessDB(object):
 
     def insert(self):
         
-        print(self.str_dc_mtx)
+        #
         if self.mac == self.computer_id['LEAK TEST #1']:
             machine , created = machine.get_or_create(name = 'LEAK TEST #1' )
         if self.mac == self.computer_id['LEAK TEST #2']:
