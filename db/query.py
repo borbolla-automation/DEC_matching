@@ -1,7 +1,7 @@
 import peewee
 from models import *
 import datetime
-
+import os
 import csv, pyodbc
 
 class AccessDB(object):
@@ -10,7 +10,8 @@ class AccessDB(object):
     def __init__(self, drive):
         
         self.drive = drive
-        self.MDB = '%s:\DataManager\DataDB.mdb'%self.drive 
+        self.MDB = '%s:\DataDB.mdb'%os.getcwd()
+
         print(self.MDB)
         self.DRV = '{Microsoft Access Driver (*.mdb)}'
         self.con = pyodbc.connect('DRIVER={};DBQ={}'.format(self.DRV,self.MDB))
@@ -20,7 +21,7 @@ class AccessDB(object):
         SQL = 'SELECT  CodeData , Dtime ,Num FROM LeakTesterData WHERE Date()= DateValue(Dtime) OR Date()-1 = DateValue(Dtime) ORDER BY Num DESC;'
         self.rows = self.cur.execute(SQL).fetchall()
         print(len(self.rows))
-        return self.rows[-1]
+        return self.rows[0]
 
     def create_str(self):
         self.str_dc_mtx = []
@@ -47,7 +48,9 @@ class AccessDB(object):
     def insert(self):
         
         print(self.str_dc_mtx)
-        piece , created = dec_engraving.get_or_create(str_code = self.str_dc_mtx[0] , code_from_die_casting = self.str_dc_mtx[1] , status = 0 , machine_code = 2)
+
+        machine
+        casting_piece , created = dec_engraving.get_or_create(casting_code = self.rows[0])
         if created : 
             print("Created") 
         else: 
@@ -73,6 +76,7 @@ if __name__ == '__main__':
     last = leak2.query()
     crt_str = leak2.create_str()
     created = leak2.insert()
+    leak2.close_connections()
 """
     def insert(self):
         for piece in self.rows:

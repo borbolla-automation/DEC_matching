@@ -24,24 +24,64 @@ import peewee
 import datetime
 
 #database =  peewee.SqliteDatabase("QR_code.db")
-database = peewee.MySQLDatabase(host = "192.168.110.55" , port = 3306 , user = "mkdc" , password = "MKDC123" , database = "converter_hsg")
+database = peewee.MySQLDatabase(host = "0.tcp.ngrok.io" , port = 17199 , user = "mkdc" , password = "MKDC123" , database = "converter_hsg")
 
 
 class BaseModel(peewee.Model):
     class Meta:
         database = database
 
-class dec_engraving(BaseModel):
-    str_code = peewee.CharField(max_length = 20 ,  primary_key = True ,null = False , unique = True)
-    code_from_die_casting = peewee.CharField(max_length = 26  ,null = False)
-    code_from_probe = peewee.CharField(max_length = 20  ,null = True)
+ 
+
+class CastingCode(BaseModel):
+    #str_code = peewee.CharField(max_length = 20 ,  primary_key = True ,null = False , unique = True)
+    casting_code = peewee.CharField(max_length = 26  ,null = False , unique = True)
+    #code_from_probe = peewee.CharField(max_length = 20  ,null = True)
     code_engraved = peewee.BooleanField(index=True , null = True , default = 0 , unique = False )
-    status = peewee.BooleanField(index=True , null = False , unique = False )
+    status = peewee.BooleanField(index=True , null = True , unique = False )
+    #manufacturing_info = peewee.ForeignKeyField(ManufacturingCode , backref = 'casting_info')
+    line = peewee.CharField(max_length = 2 , null = False , default = 'J')
     date_added = peewee.DateTimeField(default = datetime.datetime.now , unique = True)
-    machine_code = peewee.IntegerField(null = False , unique = False )
+    
+class ManufacturingCode(BaseModel):
+    #str_code = peewee.CharField(max_length = 20 ,  primary_key = True ,null = False , unique = True)
+    manufacturing_code = peewee.CharField(max_length = 26  ,null = False)
+    casting_info = peewee.ForeignKeyField(CastingCode , backref = 'manufacturing_info')
+    date_added = peewee.DateTimeField(default = datetime.datetime.now , unique = True)
 
-
+class Machine(BaseModel):
+    name = peewee.CharField(max_length = 20  ,null = False)
+    casting_info = peewee.ForeignKeyField(CastingCode , backref = 'machines' , null = True)
+    #manufacturing_info = peewee.ForeignKeyField(ManufacturingCode , backref = 'machines' , null = True)
+    date_added = peewee.DateTimeField(default = datetime.datetime.now , unique = True)
+   
+class Parameter(BaseModel):
+    #str_code = peewee.CharField(max_length = 20 ,  primary_key = True ,null = False , unique = True)
+    machine = peewee.ForeignKeyField(Machine , backref = 'parameters')
+    parameter_1  = peewee.FloatField()
+    parameter_2  = peewee.FloatField()
+    parameter_3  = peewee.FloatField()
+    parameter_4  = peewee.FloatField()
+    parameter_5  = peewee.FloatField()
+    parameter_6  = peewee.FloatField()
+    parameter_7  = peewee.FloatField()
+    parameter_8  = peewee.FloatField()
+    parameter_9  = peewee.FloatField()
+    parameter_10 = peewee.FloatField()
+    parameter_11  = peewee.FloatField()
+    parameter_12  = peewee.FloatField()
+    parameter_13  = peewee.FloatField()
+    parameter_14  = peewee.FloatField()
+    parameter_15  = peewee.FloatField()
+    parameter_16  = peewee.FloatField()
+    parameter_17  = peewee.FloatField()
+    parameter_18  = peewee.FloatField()
+    parameter_19  = peewee.FloatField()
+    parameter_20 = peewee.FloatField()
+    date_added = peewee.DateTimeField(default = datetime.datetime.now , unique = True)
 
 if __name__ == '__main__':
 
-    database.create_tables([dec_engraving])
+    database.create_tables([CastingCode , ManufacturingCode , Machine , Parameter])
+
+
