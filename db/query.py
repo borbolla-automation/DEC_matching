@@ -40,9 +40,9 @@ class AccessDB(object):
             print("not created!") 
 
         if self.mac == self.computer_id['LEAK TEST #1']:
-            machine , created = Machine.get_or_create(name = 'LEAK TEST #1' , castig_info = casting_piece)
+            machine , created = Machine.get_or_create(name = 'LEAK TEST #1' , casting_info = casting_piece)
         if self.mac == self.computer_id['LEAK TEST #2']:
-            machine , created = Machine.get_or_create(name = 'LEAK TEST #2' , castig_info = casting_piece)    
+            machine , created = Machine.get_or_create(name = 'LEAK TEST #2' , casting_info = casting_piece)    
         
         
 
