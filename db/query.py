@@ -26,20 +26,26 @@ class AccessDB(object):
         
 
     def query(self):
-        SQL = 'SELECT  CodeData , Dtime ,Num FROM LeakTesterData WHERE Date()= DateValue(Dtime) OR Date()-1 = DateValue(Dtime) ORDER BY Num DESC;'
+        SQL = 'SELECT  CodeData , Dtime ,Num , TotalOkNg   FROM LeakTesterData WHERE Date()= DateValue(Dtime) OR Date()-1 = DateValue(Dtime) ORDER BY Num DESC;'
         self.rows = self.cur.execute(SQL).fetchall()
         print(len(self.rows))
         return self.rows[-1]
 
     def insert(self):
         
-        #
+        casting_piece , created = CastingCode.get_or_create(casting_code = self.rows[0][0] ,)
+        if created : 
+            print("Created") 
+        else: 
+            print("not created!") 
+
         if self.mac == self.computer_id['LEAK TEST #1']:
-            machine , created = Machine.get_or_create(name = 'LEAK TEST #1' )
+            machine , created = Machine.get_or_create(name = 'LEAK TEST #1' , castig_info = casting_piece)
         if self.mac == self.computer_id['LEAK TEST #2']:
-            machine , created = Machine.get_or_create(name = 'LEAK TEST #2' )    
+            machine , created = Machine.get_or_create(name = 'LEAK TEST #2' , castig_info = casting_piece)    
         
-        casting_piece , created = CastingCode.get_or_create(casting_code = self.rows[0][0])
+        
+
         if created : 
             print("Created") 
         else: 
