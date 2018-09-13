@@ -63,7 +63,7 @@ class AccessDB(object):
 if __name__ == '__main__':
     leak2 = AccessDB('D')
     last = leak2.query()
-    crt_str = leak2.create_str()
+    #crt_str = leak2.create_str()
     created = leak2.insert()
     leak2.close_connections()
 """
