@@ -39,7 +39,7 @@ class AccessDB(object):
         if self.mac == self.computer_id['LEAK TEST #2']:
             machine , created = Machine.get_or_create(name = 'LEAK TEST #2' )    
         
-        casting_piece , created = dec_engraving.get_or_create(casting_code = self.rows[0][0])
+        casting_piece , created = CastingCode.get_or_create(casting_code = self.rows[0][0])
         if created : 
             print("Created") 
         else: 
