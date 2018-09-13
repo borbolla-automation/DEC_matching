@@ -28,29 +28,7 @@ class AccessDB(object):
         self.rows = self.cur.execute(SQL).fetchall()
         print(len(self.rows))
         return self.rows[-1]
-'''
-    def create_str(self):
-        self.str_dc_mtx = []
-        dt = datetime.datetime.now()
-        
-        if 'MASTER' not in self.rows[0][0]:
-            model = self.rows[0][0][6:11]
-            yy = str(dt.year)[2:]
-            mm = str(dt.month).zfill(2)
-            dd = str(dt.day).zfill(2)   
-            date = "%s%s%s"%(yy,mm,dd)
-            hh = dt.hour
-            if hh > 5 and hh <19:
-                shift = 'D'
-            else:
-                shift = 'N'
-            serial   = self.rows[0][0][-3:].zfill(4) 
-            print(self.rows[0][0])
-            self.str_dc_mtx = ["%s%s%s%s"%(model , date , shift , serial),self.rows[0][0]]
-                
 
-        return self.str_dc_mtx    
-'''
     def insert(self):
         
         print(self.str_dc_mtx)
