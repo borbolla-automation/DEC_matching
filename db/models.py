@@ -23,8 +23,8 @@
 import peewee
 import datetime
 
-#database =  peewee.SqliteDatabase("QR_code.db")
-database = peewee.MySQLDatabase(host = "0.tcp.ngrok.io" , port = 17199 , user = "mkdc" , password = "MKDC123" , database = "converter_hsg")
+database =  peewee.SqliteDatabase("QR_code.db")
+#database = peewee.MySQLDatabase(host = "0.tcp.ngrok.io" , port = 17199 , user = "mkdc" , password = "MKDC123" , database = "converter_hsg")
 
 
 class BaseModel(peewee.Model):
@@ -50,7 +50,7 @@ class ManufacturingCode(BaseModel):
     date_added = peewee.DateTimeField(default = datetime.datetime.now , unique = True)
 
 class Machine(BaseModel):
-    name = peewee.CharField(max_length = 20  ,null = False , unique = True)
+    name = peewee.CharField(max_length = 3  ,null = False , )
     casting_info = peewee.ForeignKeyField(CastingCode , backref = 'machines' , null = True)
     #manufacturing_info = peewee.ForeignKeyField(ManufacturingCode , backref = 'machines' , null = True)
     date_added = peewee.DateTimeField(default = datetime.datetime.now , unique = True)
