@@ -42,7 +42,7 @@ class AccessDB(object):
             machine = Machine.get(name = "LKT2")
 
         cml,cml_created = CastingMachineLink.get_or_create(casting_code = casting_piece , machine = machine)
-        parameters,p_created = Parameters.get_or_create(machine = machine , piece = casting_piece , parameter_1 = self.rows[0][3])
+        parameters,p_created = Parameter.get_or_create(machine = machine , piece = casting_piece , parameter_1 = self.rows[0][3])
 
         if created : 
             print("Created") 
