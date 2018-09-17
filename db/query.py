@@ -34,6 +34,10 @@ class AccessDB(object):
     def insert(self):
         
         casting_piece , created = CastingCode.get_or_create(casting_code = self.rows[0][0] ,)
+        if created : 
+            print("Created casting_code") 
+        else: 
+            print("not created casting code!")        
 
         if self.mac == self.computer_id['LEAK TEST #1']:
             machine = Machine.get(name = "LKT1")
@@ -42,12 +46,17 @@ class AccessDB(object):
             machine = Machine.get(name = "LKT2")
 
         cml,cml_created = CastingMachineLink.get_or_create(casting_code = casting_piece , machine = machine)
+        if cml_created : 
+            print("Created CastingMachineLink") 
+        else: 
+            print("not created CastingMachineLink !")
         parameters,p_created = Parameter.get_or_create(machine = machine , piece = casting_piece , parameter_1 = self.rows[0][3])
 
-        if created : 
-            print("Created") 
+
+        if p_created : 
+            print("Created parameters") 
         else: 
-            print("not created!") 
+            print("not created parameters!") 
   
 
     def open_connctions(self):
