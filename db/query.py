@@ -32,7 +32,7 @@ class AccessDB(object):
         return self.rows[-1]
 
     def insert(self):
-        
+        print(self.rows[0])
         casting_piece , created = CastingCode.get_or_create(casting_code = self.rows[0][0] ,)
         if created : 
             print("Created casting_code") 
