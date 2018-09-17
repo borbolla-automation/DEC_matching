@@ -1,5 +1,5 @@
 import peewee
-from models import *
+from models2 import *
 import datetime
 from uuid import getnode as get_mac
 import csv, pyodbc
@@ -7,7 +7,7 @@ import csv, pyodbc
 class AccessDB(object):
     """docstring for AccessDB
 """
-    def __init__(self, drive):
+    def __init__(self):
         
         self.computer_id = {'LEAK TEST #1': 268891672818713 , 'LEAK TEST #2' : 84440845556379}
         self.mac = get_mac()
@@ -34,26 +34,21 @@ class AccessDB(object):
     def insert(self):
         
         casting_piece , created = CastingCode.get_or_create(casting_code = self.rows[0][0] ,)
+
+        if self.mac == self.computer_id['LEAK TEST #1']:
+            machine = Machine.get(name = "LKT1")
+
+        if self.mac == self.computer_id['LEAK TEST #2']:
+            machine = Machine.get(name = "LKT2")
+
+        cml,cml_created = CastingMachineLink.get_or_create(casting_code = casting_piece , machine = machine1)
+        parameters,p_created = Parameters.get_or_create(machine = machine , piece = casting_piece , parameter_1 = self.rows[0][3])
+
         if created : 
             print("Created") 
         else: 
             print("not created!") 
-
-        if self.mac == self.computer_id['LEAK TEST #1']:
-            machine , created = Machine.get_or_create(name = 'LT1' , casting_info = casting_piece)
-        if self.mac == self.computer_id['LEAK TEST #2']:
-            machine , created = Machine.get_or_create(name = 'LT2' , casting_info = casting_piece)    
-        
-        
-
-        if created : 
-            print("Created") 
-        else: 
-            print("not created!")    
-            
-            
-
-
+  
 
     def open_connctions(self):
         self.MDB = '%s:\DataManager\DataDB.mdb'%self.drive 
@@ -67,7 +62,7 @@ class AccessDB(object):
         
 
 if __name__ == '__main__':
-    leak2 = AccessDB('D')
+    leak2 = AccessDB()
     last = leak2.query()
     #crt_str = leak2.create_str()
     created = leak2.insert()
