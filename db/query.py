@@ -13,12 +13,14 @@ class AccessDB(object):
         self.mac = get_mac()
         if self.mac == self.computer_id['LEAK TEST #1']:
             self.drive = 'C'
+            self.route = '%s:\LeakDataManager\DataDB.mdb'%self.drive
             print('LEAK TEST #1')
         if self.mac == self.computer_id['LEAK TEST #2']:
             self.drive = 'D'    
+            self.route = '%s:\DataManager\DataDB.mdb'%self.drive
             print('LEAK TEST #2')
         
-        self.MDB = '%s:\LeakDataManager\DataDB.mdb'%self.drive 
+        self.MDB = '%s'%self.route 
         print(self.MDB)
         self.DRV = '{Microsoft Access Driver (*.mdb)}'
         self.con = pyodbc.connect('DRIVER={};DBQ={}'.format(self.DRV,self.MDB))
