@@ -25,7 +25,7 @@ import peewee
 import datetime
 
 #database =  peewee.SqliteDatabase("QR_code2.db")
-database = peewee.MySQLDatabase(host = "0.tcp.ngrok.io" , port = 17199 , user = "mkdc" , password = "MKDC123" , database = "converter_hsg")
+database = peewee.MySQLDatabase(host = "192.168.110.55" , port = 3306 , user = "mkdc" , password = "MKDC123" , database = "converter_hsg")
 
 class BaseModel(peewee.Model):
     class Meta:
